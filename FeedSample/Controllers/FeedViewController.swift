@@ -71,7 +71,7 @@ extension FeedViewController {
         // 移動元のページの再生を停止する
         for case let previousViewController as FeedCellViewController in previousViewControllers
             where previousViewController.page != newPage {
-            previousViewController.stop()
+                previousViewController.stop()
         }
 
         // 移動先のページの再生を開始する
@@ -123,9 +123,9 @@ extension FeedViewController: UIPageViewControllerDelegate {
         guard
             let viewController = pageViewController.viewControllers?.first as? FeedCellViewController,
             let newPage = viewController.page
-        else {
-            assertionFailure("should never reach here")
-            return
+            else {
+                assertionFailure("should never reach here")
+                return
         }
 
         pageWillChange(newPage: newPage, viewController: viewController, previousViewControllers: previousViewControllers)

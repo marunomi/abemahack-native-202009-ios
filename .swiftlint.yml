@@ -1,0 +1,24 @@
+disabled_rules:
+
+
+opt_in_rules:
+
+disabled_rules:
+  - todo
+  - file_name
+  - force_cast
+  - discouraged_object_literal
+
+excluded:
+  - Pods
+  - .git
+identifier_name:
+  max_length: 40
+  excluded:
+    - f
+
+trailing_comma:
+  mandatory_comma: true
+line_length: 150
+
+# etc
