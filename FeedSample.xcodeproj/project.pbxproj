@@ -136,6 +136,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EFC24799250F6E0700E2C081 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				FFB25CA2230CDF3C00CBB221 /* FeedCellViewController.swift */,
+				FFB25CA4230CDF4B00CBB221 /* FeedCellViewController.xib */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		FFABC61722F8337200D424F7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,22 +184,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		FFB25CA8230CE94E00CBB221 /* Views */ = {
+		FFB25CA9230CE96500CBB221 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FFB25CA2230CDF3C00CBB221 /* FeedCellViewController.swift */,
-				FFB25CA4230CDF4B00CBB221 /* FeedCellViewController.xib */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		FFB25CA9230CE96500CBB221 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
+				EFC24799250F6E0700E2C081 /* CustomCells */,
 				FFBB477522F139E700C3A573 /* FeedViewController.storyboard */,
 				FFBB477322F139E700C3A573 /* FeedViewController.swift */,
 			);
-			path = Controllers;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FFBB476522F139E700C3A573 = {
@@ -218,11 +219,10 @@
 		FFBB477022F139E700C3A573 /* FeedSample */ = {
 			isa = PBXGroup;
 			children = (
-				FFB25CA9230CE96500CBB221 /* Controllers */,
+				FFB25CA9230CE96500CBB221 /* Views */,
 				FFB25CA0230CDD5F00CBB221 /* Models */,
 				FFABC61722F8337200D424F7 /* Resources */,
 				FFB25CA1230CDD6700CBB221 /* Utilities */,
-				FFB25CA8230CE94E00CBB221 /* Views */,
 				FFBB477122F139E700C3A573 /* AppDelegate.swift */,
 				FFBB477822F139F000C3A573 /* Assets.xcassets */,
 				FFBB477D22F139F000C3A573 /* Info.plist */,
