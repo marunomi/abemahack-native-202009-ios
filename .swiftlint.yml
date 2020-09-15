@@ -16,6 +16,10 @@ identifier_name:
   max_length: 40
   excluded:
     - f
+    - r
+    - g
+    - b
+  allowed_symbols: "_"
 
 trailing_comma:
   mandatory_comma: true
