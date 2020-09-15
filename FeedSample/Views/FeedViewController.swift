@@ -2,6 +2,7 @@ import AVKit
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class FeedViewController: UIPageViewController {
 
@@ -30,8 +31,12 @@ class FeedViewController: UIPageViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        tableView.register(CommentsCell.self, forCellReuseIdentifier: "CommentsCell")
+
         self.view.addSubview(tableView)
 
+        player.isMuted = true
         dataSource = self
         delegate = self
 
@@ -56,7 +61,7 @@ class FeedViewController: UIPageViewController {
             }).disposed(by: disposeBag)
 
         //tableView
-        viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "Cell")) { _, element, cell in
+        viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "CommentsCell")) { _, element, cell in
             cell.textLabel?.text = element.id + " : " + element.message
         }.disposed(by: disposeBag)
 

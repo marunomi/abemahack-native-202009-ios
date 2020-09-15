@@ -1,10 +1,15 @@
 import AVKit
 import UIKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 final class FeedCellViewController: UIViewController {
 
     private(set) var channel: Channel?
     private(set) var page: Int?
+
+    private let disposeBag = DisposeBag()
 
     @IBOutlet private weak var playerContainerView: UIView!
 
@@ -31,6 +36,13 @@ final class FeedCellViewController: UIViewController {
             playerViewController.view.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor),
             playerViewController.view.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor),
         ])
+
+        //        self.playerContainerView.rx
+        //            .tapGesture(numberOfTaprequired: 2)
+        //            .subscribe(onNext: { _ in
+        //
+        //            }).dispoded(by: disposeBag)
+
     }
 
     func play(with player: AVPlayer) {
