@@ -25,17 +25,31 @@ final class FeedCellViewModel {
         comments = _comments.asObservable()
     }
 
-    func viewDidLoad() {
-        index += 1
+    func viewDidLoad(_ cnt: Int) {
 
-        model.loadComment(at: index)
+        model.loadComment(at: cnt)
             .subscribe(onNext: { [weak self] in
                 guard let me = self else { return }
 
                 //index番目のcommentを，配列に追加したい
                 let comments = me._comments.value
-                self?._comments.accept(comments + [$0])
+                self?._comments.accept([$0] + comments)
             }).disposed(by: disposeBag)
 
+    }
+
+    //カウントアップよう分からんかっったな
+    func startCommentReplay() -> Observable<Void> {
+        var timer = Timer()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
+            if self.index >= 50 {
+                self.index = 0
+            }
+            self.index += 1
+        })
+        return Observable.create { observer in
+            observer.onCompleted()
+            return Disposables.create()
+        }
     }
 }

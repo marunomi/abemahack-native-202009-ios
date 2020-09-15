@@ -94,7 +94,19 @@ final class FeedCellViewController: UIViewController {
             cell.userIdLabel.text = element.userId
         }.disposed(by: disposeBag)
 
-        viewModel.viewDidLoad()
+        //viewModel.viewDidLoad()
+
+        //timer
+        //だいぶ無理やり
+        var cnt = 0
+        var timer = Timer()
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true, block: { _ in
+            if cnt >= 50 {
+                cnt = 0
+            }
+            cnt += 1
+            self.viewModel.viewDidLoad(cnt)
+        })
 
     }
 
