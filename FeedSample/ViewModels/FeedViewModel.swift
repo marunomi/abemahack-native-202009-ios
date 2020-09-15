@@ -12,11 +12,14 @@ import RxCocoa
 import AVKit
 
 final class FeedViewModel {
-
+    private let model: ModelProtocol
     private let disposeBag = DisposeBag()
 
-    init(player: AVPlayer,
-         model: ModelProtocol? = nil) {
+    var comments: Observable<[Comment]>
 
+    init(player: AVPlayer,
+         model: ModelProtocol = Model()) {
+        self.model = model
+        comments = model.loadComment()
     }
 }

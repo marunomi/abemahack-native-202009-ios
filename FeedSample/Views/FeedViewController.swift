@@ -9,6 +9,9 @@ class FeedViewController: UIPageViewController {
     /// - NOTE: 多重再生を防ぐためにViewController単位で単一のプレイヤーを使う
     private let player = AVPlayer()
 
+    ///コメント表示用のテーブルビュー
+    private let tableView = UITableView()
+
     /// 現在表示中のページ
     private var currentPage: Int?
 
@@ -23,6 +26,11 @@ class FeedViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 64
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .white
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tableView)
 
         dataSource = self
         delegate = self
@@ -33,11 +41,24 @@ class FeedViewController: UIPageViewController {
         setViewControllers([initialViewController], direction: .forward, animated: false, completion: nil)
         pageWillChange(newPage: 0, viewController: initialViewController, previousViewControllers: [])
 
+        //constraints
+        tableView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        tableView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+
+        //Binding
+
         NotificationCenter.default.rx.notification(.AVPlayerItemDidPlayToEndTime)
             .subscribe(onNext: { [weak self] _ in
                 self?.player.seek(to: .zero)
                 self?.player.play()
             }).disposed(by: disposeBag)
+
+        //tableView
+        viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "Cell")) { _, element, cell in
+            cell.textLabel?.text = element.id + " : " + element.message
+        }.disposed(by: disposeBag)
 
     }
 }
