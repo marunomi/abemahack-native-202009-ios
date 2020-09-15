@@ -18,11 +18,10 @@ final class FeedViewModel {
     private let model: ModelProtocol
     private let disposeBag = DisposeBag()
 
-    var comments: Observable<[Comment]>
+    var comments: Observable<Comment>
 
-    init(player: AVPlayer,
-         model: ModelProtocol = Model()) {
+    init(model: ModelProtocol = Model()) {
         self.model = model
-        comments = model.loadComment()
+        comments = model.loadComment(at: 0)
     }
 }

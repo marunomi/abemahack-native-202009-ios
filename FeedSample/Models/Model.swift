@@ -9,7 +9,7 @@
 import RxSwift
 
 protocol ModelProtocol {
-    func loadComment() -> Observable<[Comment]>
+    func loadComment(at: Int) -> Observable<Comment>
 
 }
 
@@ -21,9 +21,12 @@ final class Model: ModelProtocol {
         //一応．．
     }
 
-    func loadComment() -> Observable<[Comment]> {
+    func loadComment(at: Int) -> Observable<Comment> {
+        let comments = apiSession.fetchComments()
+        let comment = comments[at]
+
         return Observable.create { observer in
-            observer.onNext(self.apiSession.fetchComments())
+            observer.onNext(comment)
             observer.onCompleted()
             return Disposables.create()
         }

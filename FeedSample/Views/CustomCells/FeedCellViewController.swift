@@ -66,6 +66,8 @@ final class FeedCellViewController: UIViewController {
             cell.textLabel?.text = element.id + " : " + element.message
         }.disposed(by: disposeBag)
 
+        viewModel.viewDidLoad()
+
     }
 
     func play(with player: AVPlayer) {

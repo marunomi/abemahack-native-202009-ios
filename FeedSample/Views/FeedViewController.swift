@@ -18,7 +18,7 @@ class FeedViewController: UIPageViewController {
         return MockApiSession.shared.fetchChannels()
     }()
 
-    private lazy var viewModel = FeedViewModel(player: player)
+    private lazy var viewModel = FeedViewModel()
 
     private let disposeBag = DisposeBag()
 
