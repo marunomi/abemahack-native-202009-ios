@@ -12,6 +12,8 @@
 		A0B82545287C4676BDF7AA06 /* Pods_FeedSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5630A65EE6B98879BCF002 /* Pods_FeedSample.framework */; };
 		A66D5ACF250E2F59001059C2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D5ACE250E2F59001059C2 /* Comment.swift */; };
 		A66D5AD3250E2FAE001059C2 /* comments.json in Resources */ = {isa = PBXBuildFile; fileRef = A66D5AD2250E2FAE001059C2 /* comments.json */; };
+		EFC2479C250F6FC100E2C081 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC2479B250F6FC100E2C081 /* FeedViewModel.swift */; };
+		EFC2479E25105AFD00E2C081 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC2479D25105AFD00E2C081 /* Model.swift */; };
 		FFB25C9022FD702200CBB221 /* broadcast.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB25C8F22FD702200CBB221 /* broadcast.json */; };
 		FFB25C9222FD702900CBB221 /* channels.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB25C9122FD702900CBB221 /* channels.json */; };
 		FFB25C9422FD703000CBB221 /* program.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB25C9322FD703000CBB221 /* program.json */; };
@@ -60,6 +62,8 @@
 		A66D5ACE250E2F59001059C2 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		A66D5AD2250E2FAE001059C2 /* comments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = comments.json; sourceTree = "<group>"; };
 		AD38926BCCC92E533D585799 /* Pods-FeedSample-FeedSampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedSample-FeedSampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-FeedSample-FeedSampleUITests/Pods-FeedSample-FeedSampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EFC2479B250F6FC100E2C081 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		EFC2479D25105AFD00E2C081 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FFB25C8F22FD702200CBB221 /* broadcast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = broadcast.json; sourceTree = "<group>"; };
 		FFB25C9122FD702900CBB221 /* channels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = channels.json; sourceTree = "<group>"; };
 		FFB25C9322FD703000CBB221 /* program.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = program.json; sourceTree = "<group>"; };
@@ -145,6 +149,14 @@
 			path = CustomCells;
 			sourceTree = "<group>";
 		};
+		EFC2479A250F6F9E00E2C081 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EFC2479B250F6FC100E2C081 /* FeedViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		FFABC61722F8337200D424F7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +179,7 @@
 		FFB25CA0230CDD5F00CBB221 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EFC2479D25105AFD00E2C081 /* Model.swift */,
 				FFB25C9922FD836700CBB221 /* BroadcastSlot.swift */,
 				A66D5ACE250E2F59001059C2 /* Comment.swift */,
 				FFB25C9722FD728900CBB221 /* Channel.swift */,
@@ -219,6 +232,7 @@
 		FFBB477022F139E700C3A573 /* FeedSample */ = {
 			isa = PBXGroup;
 			children = (
+				EFC2479A250F6F9E00E2C081 /* ViewModels */,
 				FFB25CA9230CE96500CBB221 /* Views */,
 				FFB25CA0230CDD5F00CBB221 /* Models */,
 				FFABC61722F8337200D424F7 /* Resources */,
@@ -517,8 +531,10 @@
 				FFBB477222F139E700C3A573 /* AppDelegate.swift in Sources */,
 				FFB25C9A22FD836700CBB221 /* BroadcastSlot.swift in Sources */,
 				FFB25C9822FD728900CBB221 /* Channel.swift in Sources */,
+				EFC2479E25105AFD00E2C081 /* Model.swift in Sources */,
 				FFBB477422F139E700C3A573 /* FeedViewController.swift in Sources */,
 				FFB25C9622FD714B00CBB221 /* MockApiSession.swift in Sources */,
+				EFC2479C250F6FC100E2C081 /* FeedViewModel.swift in Sources */,
 				FFB25C9E22FD84EE00CBB221 /* ProgramSlot.swift in Sources */,
 				FFB25C9C22FD83D400CBB221 /* Stats.swift in Sources */,
 				FFB25CA3230CDF3C00CBB221 /* FeedCellViewController.swift in Sources */,

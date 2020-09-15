@@ -1,5 +1,7 @@
 import AVKit
 import UIKit
+import RxSwift
+import RxCocoa
 
 class FeedViewController: UIPageViewController {
 
@@ -15,6 +17,10 @@ class FeedViewController: UIPageViewController {
         return MockApiSession.shared.fetchChannels()
     }()
 
+    private lazy var viewModel = FeedViewModel(player: player)
+
+    private let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,15 +33,12 @@ class FeedViewController: UIPageViewController {
         setViewControllers([initialViewController], direction: .forward, animated: false, completion: nil)
         pageWillChange(newPage: 0, viewController: initialViewController, previousViewControllers: [])
 
-        NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: nil,
-            queue: .main,
-            using: { [weak self] _ in
+        NotificationCenter.default.rx.notification(.AVPlayerItemDidPlayToEndTime)
+            .subscribe(onNext: { [weak self] _ in
                 self?.player.seek(to: .zero)
                 self?.player.play()
-            }
-        )
+            }).disposed(by: disposeBag)
+
     }
 }
 
