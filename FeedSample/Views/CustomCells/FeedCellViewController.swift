@@ -24,6 +24,8 @@ final class FeedCellViewController: UIViewController {
         return playerVC
     }()
 
+    private let playerOverLayView = UIView()
+
     ///コメント表示用のテーブルビュー
     private let tableView = UITableView()
 
@@ -33,14 +35,17 @@ final class FeedCellViewController: UIViewController {
         //tableView
         tableView.estimatedRowHeight = 64
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = UIColor.hex(string: "000000", alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CommentsCell.self, forCellReuseIdentifier: "CommentsCell")
         self.view.addSubview(tableView)
 
+        playerOverLayView.translatesAutoresizingMaskIntoConstraints = false
+
         view.backgroundColor = UIColor(white: 0.1, alpha: 1)
 
         playerContainerView.addSubview(playerViewController.view)
+        playerViewController.contentOverlayView?.addSubview(playerOverLayView)
 
         NSLayoutConstraint.activate([
             playerViewController.view.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
@@ -49,21 +54,44 @@ final class FeedCellViewController: UIViewController {
             playerViewController.view.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor),
         ])
 
+        if let overLayview = playerViewController.contentOverlayView {
+            NSLayoutConstraint.activate([
+                playerOverLayView.topAnchor.constraint(equalTo: overLayview.topAnchor),
+                playerOverLayView.leadingAnchor.constraint(equalTo: overLayview.leadingAnchor),
+                playerOverLayView.trailingAnchor.constraint(equalTo: overLayview.trailingAnchor),
+                playerOverLayView.bottomAnchor.constraint(equalTo: overLayview.bottomAnchor),
+            ])
+        }
+
         tableView.topAnchor.constraint(equalTo: self.playerContainerView.bottomAnchor).isActive = true
         tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
-        // Tap Gesture
+        //        // Tap Gesture
+        //        self.playerViewController.contentOverlayView?.rx
+        //            .tapGesture { gesture, _ in
+        //                gesture.numberOfTouchesRequired = 2
+        //        }
+        //        .when(.began)
+        //        .subscribe(onNext: { _ in
+        //            print("Double Tap Recognized!!:-----------------")
+        //        }).disposed(by: disposeBag)
 
-        //        self.playerContainerView.rx
-        //            .tapGesture(numberOfTaprequired: 2)
-        //            .subscribe(onNext: { _ in
-        //
-        //            }).dispoded(by: disposeBag)
+        //        self.playerViewController
+
+        self.playerOverLayView.rx
+            .tapGesture { gesture, _ in
+                gesture.numberOfTouchesRequired = 2
+        }
+        .when(.recognized)
+        .subscribe(onNext: { _ in
+            print("Double Tap Recognized!!:-----------------")
+        }).disposed(by: disposeBag)
 
         //tableView
-        viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "CommentsCell")) { _, element, cell in
-            cell.textLabel?.text = element.id + " : " + element.message
+        viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "CommentsCell", cellType: CommentsCell.self)) { _, element, cell in
+            cell.commentLabel.text = element.message
+            cell.userIdLabel.text = element.userId
         }.disposed(by: disposeBag)
 
         viewModel.viewDidLoad()
