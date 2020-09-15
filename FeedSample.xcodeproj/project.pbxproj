@@ -26,7 +26,6 @@
 		FFB25CA5230CDF4B00CBB221 /* FeedCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFB25CA4230CDF4B00CBB221 /* FeedCellViewController.xib */; };
 		FFBB477222F139E700C3A573 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBB477122F139E700C3A573 /* AppDelegate.swift */; };
 		FFBB477422F139E700C3A573 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBB477322F139E700C3A573 /* FeedViewController.swift */; };
-		FFBB477722F139E700C3A573 /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFBB477522F139E700C3A573 /* FeedViewController.storyboard */; };
 		FFBB477922F139F000C3A573 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFBB477822F139F000C3A573 /* Assets.xcassets */; };
 		FFBB477C22F139F000C3A573 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFBB477A22F139F000C3A573 /* LaunchScreen.storyboard */; };
 		FFBB478722F139F000C3A573 /* FeedSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBB478622F139F000C3A573 /* FeedSampleTests.swift */; };
@@ -77,7 +76,6 @@
 		FFBB476E22F139E700C3A573 /* FeedSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFBB477122F139E700C3A573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFBB477322F139E700C3A573 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		FFBB477622F139E700C3A573 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FeedViewController.storyboard; sourceTree = "<group>"; };
 		FFBB477822F139F000C3A573 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFBB477B22F139F000C3A573 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFBB477D22F139F000C3A573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				EFC24799250F6E0700E2C081 /* CustomCells */,
-				FFBB477522F139E700C3A573 /* FeedViewController.storyboard */,
 				FFBB477322F139E700C3A573 /* FeedViewController.swift */,
 			);
 			path = Views;
@@ -380,7 +377,6 @@
 				FFB25C9022FD702200CBB221 /* broadcast.json in Resources */,
 				FFB25C9222FD702900CBB221 /* channels.json in Resources */,
 				A66D5AD3250E2FAE001059C2 /* comments.json in Resources */,
-				FFBB477722F139E700C3A573 /* FeedViewController.storyboard in Resources */,
 				FFBB477C22F139F000C3A573 /* LaunchScreen.storyboard in Resources */,
 				FFB25C9422FD703000CBB221 /* program.json in Resources */,
 				FFB25CA5230CDF4B00CBB221 /* FeedCellViewController.xib in Resources */,
@@ -575,14 +571,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FFBB477522F139E700C3A573 /* FeedViewController.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFBB477622F139E700C3A573 /* Base */,
-			);
-			name = FeedViewController.storyboard;
-			sourceTree = "<group>";
-		};
 		FFBB477A22F139F000C3A573 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
