@@ -10,6 +10,7 @@ final class FeedCellViewController: UIViewController {
     private(set) var page: Int?
 
     private let disposeBag = DisposeBag()
+    private var viewModel = FeedCellViewModel()
 
     @IBOutlet private weak var playerContainerView: UIView!
 
@@ -23,8 +24,19 @@ final class FeedCellViewController: UIViewController {
         return playerVC
     }()
 
+    ///コメント表示用のテーブルビュー
+    private let tableView = UITableView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //tableView
+        tableView.estimatedRowHeight = 64
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .white
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(CommentsCell.self, forCellReuseIdentifier: "CommentsCell")
+        self.view.addSubview(tableView)
 
         view.backgroundColor = UIColor(white: 0.1, alpha: 1)
 
@@ -37,11 +49,22 @@ final class FeedCellViewController: UIViewController {
             playerViewController.view.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor),
         ])
 
+        tableView.topAnchor.constraint(equalTo: self.playerContainerView.bottomAnchor).isActive = true
+        tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+
+        // Tap Gesture
+
         //        self.playerContainerView.rx
         //            .tapGesture(numberOfTaprequired: 2)
         //            .subscribe(onNext: { _ in
         //
         //            }).dispoded(by: disposeBag)
+
+        //tableView
+        viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "CommentsCell")) { _, element, cell in
+            cell.textLabel?.text = element.id + " : " + element.message
+        }.disposed(by: disposeBag)
 
     }
 

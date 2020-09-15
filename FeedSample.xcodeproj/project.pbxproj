@@ -15,6 +15,7 @@
 		EFC2479C250F6FC100E2C081 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC2479B250F6FC100E2C081 /* FeedViewModel.swift */; };
 		EFC2479E25105AFD00E2C081 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC2479D25105AFD00E2C081 /* Model.swift */; };
 		EFC247A02510A73400E2C081 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC2479F2510A73400E2C081 /* CommentCell.swift */; };
+		EFC247A22510ECA900E2C081 /* FeedCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC247A12510ECA900E2C081 /* FeedCellViewModel.swift */; };
 		FFB25C9022FD702200CBB221 /* broadcast.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB25C8F22FD702200CBB221 /* broadcast.json */; };
 		FFB25C9222FD702900CBB221 /* channels.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB25C9122FD702900CBB221 /* channels.json */; };
 		FFB25C9422FD703000CBB221 /* program.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB25C9322FD703000CBB221 /* program.json */; };
@@ -65,6 +66,7 @@
 		EFC2479B250F6FC100E2C081 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		EFC2479D25105AFD00E2C081 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EFC2479F2510A73400E2C081 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		EFC247A12510ECA900E2C081 /* FeedCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellViewModel.swift; sourceTree = "<group>"; };
 		FFB25C8F22FD702200CBB221 /* broadcast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = broadcast.json; sourceTree = "<group>"; };
 		FFB25C9122FD702900CBB221 /* channels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = channels.json; sourceTree = "<group>"; };
 		FFB25C9322FD703000CBB221 /* program.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = program.json; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				EFC2479B250F6FC100E2C081 /* FeedViewModel.swift */,
+				EFC247A12510ECA900E2C081 /* FeedCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				FFB25C9622FD714B00CBB221 /* MockApiSession.swift in Sources */,
 				EFC2479C250F6FC100E2C081 /* FeedViewModel.swift in Sources */,
 				FFB25C9E22FD84EE00CBB221 /* ProgramSlot.swift in Sources */,
+				EFC247A22510ECA900E2C081 /* FeedCellViewModel.swift in Sources */,
 				FFB25C9C22FD83D400CBB221 /* Stats.swift in Sources */,
 				FFB25CA3230CDF3C00CBB221 /* FeedCellViewController.swift in Sources */,
 				A66D5ACF250E2F59001059C2 /* Comment.swift in Sources */,
