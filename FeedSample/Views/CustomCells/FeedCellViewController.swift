@@ -30,6 +30,9 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
     private let tableView = UITableView()
     private let titleLabel = UILabel()
 
+    //タップで変更したいデバイスの向きの値
+    private var deviceOriantation = UIInterfaceOrientation.landscapeRight.rawValue
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -99,16 +102,40 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
             cell.userIdLabel.text = element.userId
         }.disposed(by: disposeBag)
 
+        //デバイスの向き検出
+        NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+            .subscribe(onNext: { _ in
+                let orientation = UIDevice.current.orientation
+                switch orientation {
+                case .portrait, .portraitUpsideDown:
+                    self.titleLabel.isHidden = false
+                    self.deviceOriantation = UIInterfaceOrientation.landscapeRight.rawValue
+                case .landscapeRight, .landscapeLeft:
+                    self.titleLabel.isHidden = true
+                    self.deviceOriantation = UIInterfaceOrientation.portrait.rawValue
+                case .unknown:
+                    break
+                case .faceUp:
+                    break
+                case .faceDown:
+                    break
+                @unknown default:
+                    break
+                }
+            }).disposed(by: disposeBag)
+
         //timer
         //だいぶ無理やり
-        var cnt = 0
+        var commentIndex = 0
+        //ランダムな間隔でコメント送りたい
+        var timeInterval: TimeInterval = 2.0
         var timer = Timer()
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true, block: { _ in
-            if cnt >= 50 {
-                cnt = 0
+        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block: { _ in
+            if commentIndex >= 50 {
+                commentIndex = 0
             }
-            cnt += 1
-            self.viewModel.viewDidLoad(cnt)
+            commentIndex += 1
+            self.viewModel.viewDidLoad(commentIndex)
         })
 
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(FeedCellViewController.toFullScreen(_:)))
@@ -120,9 +147,7 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
 
     @objc private func toFullScreen(_ sender: UITapGestureRecognizer) {
         if sender.state == .recognized {
-            print("double tapped!!")
-            let value = UIInterfaceOrientation.landscapeRight.rawValue
-            UIDevice.current.setValue(value, forKey: #keyPath(UIDevice.orientation))
+            UIDevice.current.setValue(self.deviceOriantation, forKey: #keyPath(UIDevice.orientation))
         }
     }
 
