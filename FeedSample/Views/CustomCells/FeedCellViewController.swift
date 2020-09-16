@@ -40,7 +40,6 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
         titleLabel.textColor = UIColor.hex(string: "E6E6E6", alpha: 1)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "コメント"
-        //titleLabel.frame.size.height = 44
 
         //tableView
         tableView.rowHeight = 44
@@ -54,7 +53,6 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
         playerOverLayView.translatesAutoresizingMaskIntoConstraints = false
         playerContainerView.addSubview(playerViewController.view)
         playerViewController.contentOverlayView?.addSubview(playerOverLayView)
-        playerOverLayView.backgroundColor = UIColor.purple.withAlphaComponent(0.6)
         playerOverLayView.isUserInteractionEnabled = true
 
         self.view.addSubview(titleLabel)
@@ -83,17 +81,17 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
             ])
         }
 
-/*
-        self.playerOverLayView.rx
-            .tapGesture { gesture, delegate in
-                
-                gesture.numberOfTouchesRequired = 2
-        }
-        .when(.ended)
-        .subscribe(onNext: { _ in
-            print("ダブルタップされた")
-        }).disposed(by: disposeBag)
- */
+        /*
+         self.playerOverLayView.rx
+         .tapGesture { gesture, delegate in
+
+         gesture.numberOfTouchesRequired = 2
+         }
+         .when(.ended)
+         .subscribe(onNext: { _ in
+         print("ダブルタップされた")
+         }).disposed(by: disposeBag)
+         */
 
         //tableView
         viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "CommentsCell", cellType: CommentsCell.self)) { _, element, cell in
@@ -113,19 +111,19 @@ final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegat
             self.viewModel.viewDidLoad(cnt)
         })
 
-                let doubleTap = UITapGestureRecognizer(target: self, action: #selector(FeedCellViewController.toFullScreen(_:)))
-                doubleTap.delegate = self
-                doubleTap.numberOfTapsRequired = 2
-                playerOverLayView.addGestureRecognizer(doubleTap)
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(FeedCellViewController.toFullScreen(_:)))
+        doubleTap.delegate = self
+        doubleTap.numberOfTapsRequired = 2
+        playerOverLayView.addGestureRecognizer(doubleTap)
 
     }
 
     @objc private func toFullScreen(_ sender: UITapGestureRecognizer) {
         if sender.state == .recognized {
             print("double tapped!!")
+            let value = UIInterfaceOrientation.landscapeRight.rawValue
+            UIDevice.current.setValue(value, forKey: #keyPath(UIDevice.orientation))
         }
-        //横全画面表示を作る
-
     }
 
     func play(with player: AVPlayer) {
