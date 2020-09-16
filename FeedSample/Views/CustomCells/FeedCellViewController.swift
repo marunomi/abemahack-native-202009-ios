@@ -4,7 +4,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
-final class FeedCellViewController: UIViewController {
+final class FeedCellViewController: UIViewController, UIGestureRecognizerDelegate {
 
     private(set) var channel: Channel?
     private(set) var page: Int?
@@ -18,7 +18,7 @@ final class FeedCellViewController: UIViewController {
         let playerVC = AVPlayerViewController()
         playerVC.showsPlaybackControls = false
         playerVC.videoGravity = .resizeAspectFill
-        playerVC.view.isUserInteractionEnabled = false
+        playerVC.view.isUserInteractionEnabled = true
         playerVC.view.backgroundColor = .darkGray
         playerVC.view.translatesAutoresizingMaskIntoConstraints = false
         return playerVC
@@ -48,11 +48,14 @@ final class FeedCellViewController: UIViewController {
         tableView.backgroundColor = UIColor.hex(string: "000000", alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CommentsCell.self, forCellReuseIdentifier: "CommentsCell")
+        tableView.allowsSelection = false
 
         //avplayer
         playerOverLayView.translatesAutoresizingMaskIntoConstraints = false
         playerContainerView.addSubview(playerViewController.view)
         playerViewController.contentOverlayView?.addSubview(playerOverLayView)
+        playerOverLayView.backgroundColor = UIColor.purple.withAlphaComponent(0.6)
+        playerOverLayView.isUserInteractionEnabled = true
 
         self.view.addSubview(titleLabel)
         self.view.addSubview(tableView)
@@ -80,26 +83,17 @@ final class FeedCellViewController: UIViewController {
             ])
         }
 
-        //        // Tap Gesture
-        //        self.playerViewController.contentOverlayView?.rx
-        //            .tapGesture { gesture, _ in
-        //                gesture.numberOfTouchesRequired = 2
-        //        }
-        //        .when(.began)
-        //        .subscribe(onNext: { _ in
-        //            print("Double Tap Recognized!!:-----------------")
-        //        }).disposed(by: disposeBag)
-
-        //        self.playerViewController
-
+/*
         self.playerOverLayView.rx
-            .tapGesture { gesture, _ in
+            .tapGesture { gesture, delegate in
+                
                 gesture.numberOfTouchesRequired = 2
         }
-        .when(.recognized)
+        .when(.ended)
         .subscribe(onNext: { _ in
-            print("Double Tap Recognized!!:-----------------")
+            print("ダブルタップされた")
         }).disposed(by: disposeBag)
+ */
 
         //tableView
         viewModel.comments.bind(to: tableView.rx.items(cellIdentifier: "CommentsCell", cellType: CommentsCell.self)) { _, element, cell in
@@ -118,6 +112,19 @@ final class FeedCellViewController: UIViewController {
             cnt += 1
             self.viewModel.viewDidLoad(cnt)
         })
+
+                let doubleTap = UITapGestureRecognizer(target: self, action: #selector(FeedCellViewController.toFullScreen(_:)))
+                doubleTap.delegate = self
+                doubleTap.numberOfTapsRequired = 2
+                playerOverLayView.addGestureRecognizer(doubleTap)
+
+    }
+
+    @objc private func toFullScreen(_ sender: UITapGestureRecognizer) {
+        if sender.state == .recognized {
+            print("double tapped!!")
+        }
+        //横全画面表示を作る
 
     }
 
