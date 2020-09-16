@@ -13,6 +13,7 @@ final class CommentsCell: UITableViewCell {
 
     public var commentLabel = UILabel()
     public var userIdLabel = UILabel()
+    private let containerView = UIView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,21 +22,29 @@ final class CommentsCell: UITableViewCell {
         userIdLabel.numberOfLines = 0
         backgroundColor = UIColor.hex(string: "212121", alpha: 1)
 
-        contentView.addSubview(commentLabel)
-        contentView.addSubview(userIdLabel)
+        containerView.addSubview(commentLabel)
+        containerView.addSubview(userIdLabel)
+        contentView.addSubview(containerView)
 
         commentLabel.translatesAutoresizingMaskIntoConstraints = false
         userIdLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
 
         userIdLabel.textColor = UIColor.hex(string: "E6E6E6", alpha: 1)
         commentLabel.textColor = UIColor.hex(string: "E6E6E6", alpha: 1)
 
-        userIdLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        userIdLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: self.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            userIdLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            userIdLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            commentLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            commentLabel.leftAnchor.constraint(equalTo: userIdLabel.rightAnchor, constant: 16),
+            commentLabel.heightAnchor.constraint(equalTo: userIdLabel.heightAnchor),
 
-        commentLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        commentLabel.leftAnchor.constraint(equalTo: userIdLabel.rightAnchor, constant: 16).isActive = true
-        commentLabel.heightAnchor.constraint(equalTo: userIdLabel.heightAnchor).isActive = true
+        ])
     }
 
     required init?(coder: NSCoder) {
