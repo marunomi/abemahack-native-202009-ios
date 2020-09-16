@@ -28,30 +28,47 @@ final class FeedCellViewController: UIViewController {
 
     ///コメント表示用のテーブルビュー
     private let tableView = UITableView()
+    private let titleLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = UIColor.hex(string: "000000", alpha: 1)
+
+        //titleLabel
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textColor = UIColor.hex(string: "E6E6E6", alpha: 1)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "コメント"
+        //titleLabel.frame.size.height = 44
+
         //tableView
-        tableView.estimatedRowHeight = 64
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 44
+        tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.hex(string: "000000", alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CommentsCell.self, forCellReuseIdentifier: "CommentsCell")
-        self.view.addSubview(tableView)
 
+        //avplayer
         playerOverLayView.translatesAutoresizingMaskIntoConstraints = false
-
-        view.backgroundColor = UIColor(white: 0.1, alpha: 1)
-
         playerContainerView.addSubview(playerViewController.view)
         playerViewController.contentOverlayView?.addSubview(playerOverLayView)
+
+        self.view.addSubview(titleLabel)
+        self.view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
             playerViewController.view.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
             playerViewController.view.leadingAnchor.constraint(equalTo: playerContainerView.leadingAnchor),
             playerViewController.view.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor),
             playerViewController.view.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: self.playerContainerView.bottomAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            titleLabel.bottomAnchor.constraint(equalTo: self.tableView.topAnchor, constant: -6),
+            tableView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 8),
+            tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            tableView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
 
         if let overLayview = playerViewController.contentOverlayView {
@@ -62,10 +79,6 @@ final class FeedCellViewController: UIViewController {
                 playerOverLayView.bottomAnchor.constraint(equalTo: overLayview.bottomAnchor),
             ])
         }
-
-        tableView.topAnchor.constraint(equalTo: self.playerContainerView.bottomAnchor).isActive = true
-        tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
         //        // Tap Gesture
         //        self.playerViewController.contentOverlayView?.rx
@@ -93,8 +106,6 @@ final class FeedCellViewController: UIViewController {
             cell.commentLabel.text = element.message
             cell.userIdLabel.text = element.userId
         }.disposed(by: disposeBag)
-
-        //viewModel.viewDidLoad()
 
         //timer
         //だいぶ無理やり
