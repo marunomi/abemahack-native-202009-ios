@@ -9,7 +9,7 @@ final class MockApiSession {
             let path = Bundle.main.path(forResource: "channels", ofType: "json"),
             let jsonData = try? getJSONData(path: path),
             let apiChannels = try? JSONDecoder().decode(Channel.ApiChannels.self, from: jsonData)
-            else { return [] }
+        else { return [] }
         return apiChannels.channels
     }
 
@@ -18,7 +18,7 @@ final class MockApiSession {
             let path = Bundle.main.path(forResource: "broadcast", ofType: "json"),
             let jsonData = try? getJSONData(path: path),
             let apiBroadcastSlots = try? JSONDecoder().decode(BroadcastSlot.ApiBroadcastSlots.self, from: jsonData)
-            else { return [] }
+        else { return [] }
         return apiBroadcastSlots.slots
     }
 
@@ -27,7 +27,7 @@ final class MockApiSession {
             let path = Bundle.main.path(forResource: "program", ofType: "json"),
             let jsonData = try? getJSONData(path: path),
             let apiProgramSlots = try? JSONDecoder().decode(ProgramSlot.ApiProgramSlots.self, from: jsonData)
-            else { return [] }
+        else { return [] }
         return apiProgramSlots.slots
     }
 
@@ -39,11 +39,11 @@ final class MockApiSession {
             f.locale = .current
             f.dateFormat = "yyyyMMddHHmmssSS"
             return f
-            }())
+        }())
         guard let path = Bundle.main.path(forResource: "comments", ofType: "json"),
-            let jsonData = try? getJSONData(path: path),
-            let apiComments = try? decoder.decode(Comment.ApiComments.self, from: jsonData)
-            else { return [] }
+              let jsonData = try? getJSONData(path: path),
+              let apiComments = try? decoder.decode(Comment.ApiComments.self, from: jsonData)
+        else { return [] }
         return apiComments.comments
     }
 
